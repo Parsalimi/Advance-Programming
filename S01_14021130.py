@@ -4,6 +4,7 @@ flag = True
 min = 0
 new_list = []
 entered_list = []
+Integear = True
 
 
 def func_sort(entery_list):
@@ -35,8 +36,12 @@ while flag:
     count = int(input("How many numbers do you want to enter: "))
     for i in range(0, count):
         system('cls')
-        entered_num = int(input(f"Please enter the {i+1}th number: "))
+        try:
+            entered_num = int(input("Please enter the number: ")) 
+        except ValueError:
+            entered_num = int(input("Please enter an integear\nPlease enter the number: "))
         entered_list.append(entered_num)
+
     while True:
         system("cls")
         print(f"Entered List is: {entered_list}")
