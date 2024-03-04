@@ -1,5 +1,5 @@
 from os import system
-import S03_P03_14021214 as cal
+import Calculator as cal
 
 
 def wait():

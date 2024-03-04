@@ -1,3 +1,3 @@
-import S03_P04_14021214 as pg
+import pass_gen as pg
 
 print(pg.password_generator())
