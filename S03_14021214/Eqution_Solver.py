@@ -23,21 +23,24 @@ def Parantez(txt):
             parantez_close.append(i)
 
 system('cls')
-Eqution = input("Please Enter the Eqution: ")
+#Eqution = input("Please Enter the Eqution: ")
+Eqution = "(()(()))"
 Parantez(Eqution)
 print(parantez_open, parantez_close)
 parantez_open.reverse()
 print(parantez_open)
 
 parantezs = []
-for index, i in enumerate(parantez_open):
+
+for i in parantez_open:
+    index = 0
     while True:
-        if i > parantez_close[index]:
+        if i < parantez_close[index]:
             parantezs.append([i, parantez_close[index]])
+            parantez_close.pop(index)
+            index -= 1
             break
         else:
             index += 1
 
 print(parantezs)
-        
-        
