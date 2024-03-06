@@ -1,46 +1,31 @@
 from os import system
-
-parantez_open = []
-parantez_close = []
-
-def ParantezOpenCheck(txt):
-    if txt == "(":
-        return True
-
-def ParantezCloseCheck(txt):
-    if txt == ")":
-        return True
-    
-    
-
-def Parantez(txt):
-    for i in range(0, len(txt)):
-        if ParantezOpenCheck(txt[i]) == True:
-            parantez_open.append(i)
-
-    for i in range(0, len(txt)):
-        if ParantezCloseCheck(txt[i]) == True:
-            parantez_close.append(i)
-
 system('cls')
-#Eqution = input("Please Enter the Eqution: ")
-Eqution = "(()(()))"
-Parantez(Eqution)
-print(parantez_open, parantez_close)
-parantez_open.reverse()
-print(parantez_open)
 
-parantezs = []
 
-for i in parantez_open:
-    index = 0
-    while True:
-        if i < parantez_close[index]:
-            parantezs.append([i, parantez_close[index]])
-            parantez_close.pop(index)
-            index -= 1
-            break
-        else:
-            index += 1
+class main():
+    Equtions = [[5, '+', 10], [10, 'x', 20], [20, 'x', 5], [5, '/', 2.5], [2.5, '+', 10]]
 
-print(parantezs)
+print(main.Equtions)
+for index, sub_eq in enumerate(main.Equtions):
+    if sub_eq[1] == "x":
+        answer = sub_eq[0] * sub_eq[2]
+        main.Equtions.remove(sub_eq)
+        main.Equtions.insert(index, [0,answer,0])
+        if index >= 1:
+            main.Equtions[index-1][2] = answer
+            main.Equtions[index+1][0] = answer
+        
+    elif sub_eq[1] == "/":
+        answer = sub_eq[0] / sub_eq[2]
+        main.Equtions.remove(sub_eq)
+        main.Equtions.insert(index, [0,answer,0])
+        if index >= 1:
+            main.Equtions[index-1][2] = answer
+            main.Equtions[index+1][0] = answer
+
+f_index = 0
+for sub_eq in main.Equtions:
+    if sub_eq[0] == 0 and sub_eq[2] == 0:
+        main.Equtions[0][2] = sub_eq[1]
+
+print(main.Equtions)
