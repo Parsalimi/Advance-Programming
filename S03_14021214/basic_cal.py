@@ -78,6 +78,12 @@ while index < len(main.Equtions):
         main.Equtions.pop(index)
         index -= 1
     if main.Equtions[index][0] == "/":
+        if main.Equtions[index-1][0] == 0 or main.Equtions[index+1][0] == 0:
+            Header()
+            print("You can't divide anything by zero\nOr zero by anything")
+            wait()
+            break
+        answer = main.Eq
         answer = main.Equtions[index-1][0] / main.Equtions[index+1][0]
         main.Equtions[index][0] = answer
         main.Equtions.pop(index-1)
