@@ -83,7 +83,6 @@ while index < len(main.Equtions):
             print("You can't divide anything by zero\nOr zero by anything")
             wait()
             break
-        answer = main.Eq
         answer = main.Equtions[index-1][0] / main.Equtions[index+1][0]
         main.Equtions[index][0] = answer
         main.Equtions.pop(index-1)
