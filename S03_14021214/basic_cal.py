@@ -1,19 +1,18 @@
 from os import system
-import Calculator as cal
-
 
 def wait():
     input("Press Enter to Continue!!")
 
+def Header():
+    system("cls")
+    print(main.Eqution)
+
 class main: 
     Eqution = ""
-    equal = 0
     Equtions = []
 
-def Operation(entrynum):
+def Operation():
     while True:
-        system('cls')
-        print(main.Eqution)
         entryoperation = input("Please Enter your Operation\n(Enter + - / x)\n> ")
         if entryoperation == "+":
             main.Eqution += " +"
@@ -27,66 +26,82 @@ def Operation(entrynum):
         elif entryoperation == "x":
             main.Eqution += " x"
             return "x"
+        elif entryoperation == "n":
+            return "n"
         else:
             print("Please Enter an valid answer!")
             wait()
 
 flag = True
 th_number = 1
-numbers = []
-
+main_Program = True
 
 # Main Program
-print(main.Eqution)
-
-# Getting First Number
+Header()
+# Get Number
 inputnum = int(input(f"Please enter the {th_number}th number\n> "))
-numbers.append(inputnum)
 main.Eqution += f"{inputnum}"
 th_number += 1
-main.Equtions.append([inputnum,"",0])
+main.Equtions.append([inputnum])
+
+Header()
 # Operation
-entryoperation = Operation(inputnum)
-main.Equtions[th_number-2][1] = entryoperation
-system("cls")
-print(main.Eqution)
-inputnum = int(input(f"Please enter the {th_number}th number\n> "))
-main.Eqution += f" {inputnum}"
-main.Equtions[th_number-2][2] = inputnum
-system("cls")
-print(main.Eqution)
-numbers.append(inputnum)
-th_number += 1 # 3
-main.equal = cal.calulator(numbers[0], numbers[1], entryoperation)
-numbers.clear()
-answer = input("Do you want to Continue? (no to exit)\n> ")
-if answer == "no":
-    pass
-else:
-    while True:
-        system("cls")
-        print(main.Eqution)
-        entryoperation = Operation(inputnum)
-        main.Equtions.append([inputnum,entryoperation,0])
-        system("cls")
-        print(main.Eqution)
-        inputnum = int(input(f"Please enter the {th_number}th number\n> "))
-        main.Eqution += f" {inputnum}"
-        main.Equtions[th_number-2][2] = inputnum
-        th_number += 1
-        system("cls")
-        print(main.Eqution)
-        main.equal = cal.calulator(main.equal, inputnum, entryoperation)
-        numbers.clear()
-        answer = input("Do you want to Continue? (no to exit)\n> ")
-        if answer == "no":
-            break
+entryoperation = Operation()
+main.Equtions.append([entryoperation])
+
+while main_Program:
+    Header()
+
+    # Get Number
+    inputnum = int(input(f"Please enter the {th_number}th number\n> "))
+    main.Eqution += f" {inputnum}"
+    th_number += 1
+    main.Equtions.append([inputnum])
+
+    Header()
+    if th_number > 2:
+        print("To quit enter 'n'")
+    # Operation
+    entryoperation = Operation()
+    if entryoperation == 'n':
+        main_Program = False
+        break
+    main.Equtions.append([entryoperation])
         
-print(main.Equtions)
-for sub_eq in main.Equtions:
-    if sub_eq[1] == "x":
-        answer = sub_eq[0] * sub_eq[2]
-    elif sub_eq[1] == "/":
-        answer = sub_eq[0] / sub_eq[2]
-print("answer: ", main.equal)
+index = 0
+# Second Priority
+while index < len(main.Equtions):
+    if main.Equtions[index][0] == "x":
+        answer = main.Equtions[index-1][0] * main.Equtions[index+1][0]
+        main.Equtions[index][0] = answer
+        main.Equtions.pop(index-1)
+        main.Equtions.pop(index)
+        index -= 1
+    if main.Equtions[index][0] == "/":
+        answer = main.Equtions[index-1][0] / main.Equtions[index+1][0]
+        main.Equtions[index][0] = answer
+        main.Equtions.pop(index-1)
+        main.Equtions.pop(index)
+        index -= 1
+    index += 1
+
+index = 0
+# Third Priority
+while index < len(main.Equtions):
+    if main.Equtions[index][0] == "+":
+        answer = main.Equtions[index-1][0] + main.Equtions[index+1][0]
+        main.Equtions[index][0] = answer
+        main.Equtions.pop(index-1)
+        main.Equtions.pop(index)
+        index -= 1
+    if main.Equtions[index][0] == "-":
+        answer = main.Equtions[index-1][0] - main.Equtions[index+1][0]
+        main.Equtions[index][0] = answer
+        main.Equtions.pop(index-1)
+        main.Equtions.pop(index)
+        index -= 1
+    index += 1
+
+Header()
+print("Answer: ", main.Equtions[0][0])
 
