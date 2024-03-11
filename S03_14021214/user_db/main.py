@@ -27,6 +27,7 @@ def UpdateUsersList():
     file.close()
         
 def add_user():
+    UpdateUsersList()
     system('cls')
     username = input("username: ")
     password = input("password: ")
@@ -36,18 +37,25 @@ def add_user():
     age = input("age: ")
 
     # Looking for Last ID
-    # the algorithm is not efficient so please fix this
-    file = open("users.txt", "r")
-    for userLine in file:
-        last_user_id = int(userLine[0])
+    file = open("last_user_login_id.txt", "r")
+    last_user_login_id = file.read()
     file.close()
+
+    last_user_login_id = int(last_user_login_id)+1
+
     file = open("users.txt", "a")
-    file.write(f"\n{last_user_id+1},{username},{password},{f_name},{l_name},{email},{age}")
+    file.write(f"\n{last_user_login_id},{username},{password},{f_name},{l_name},{email},{age}")
+    file.close()
+
+    
+    file = open("last_user_login_id.txt", "w")
+    file.write(str(last_user_login_id))
     file.close()
 
     
 
 def ShowUsers():
+    UpdateUsersList()
     system('cls')
     for acc in users:
         print(acc["ID"], column,
@@ -60,13 +68,48 @@ def ShowUsers():
               end="")
     print()
     wait()
+
+def SearchUser():
+    UpdateUsersList()
+    while True:
+        system('cls')
+        print("0 to exit")
+        answer = input("Please enter the user ID\n> ")
+        if answer == "0":
+            break
+        else:
+            for acc in users:
+                if acc["ID"] == answer:
+                    print(  acc["ID"], column,
+                            acc["Username"], column, 
+                            acc["Password"], column,
+                            acc["First Name"], column,
+                            acc["Last Name"], column,
+                            acc["Email"], column,
+                            acc["Age"],
+                            end="")
+        print()
+        wait()
+
+def DeleteUser():
+    while True:
+        system('cls')
+        print("0 to exit")
+        answer = input("Please enter the user ID\n> ")
+        file = open("test.txt","a")
+        for acc in users:
+            if acc["ID"] == answer:
+                pass
+            else:
+                file.write(f"{acc[0]},{acc[1]},{acc[2]},{acc[3]},{acc[4]}")
+                
         
 flag = True
 while flag:
     UpdateUsersList()
     system('cls')
     print("0 to exit!")
-    answer = input("1. Show Users\n2. Add User\n3. Search User\n> ")
+    answer = input("1. Show Users\n2. Add User\n3. Search User\n4. Delete User\n> ")
     if answer == "1":
         ShowUsers()
     elif answer == "2":
@@ -76,7 +119,9 @@ while flag:
             if answer == "no":
                 break
     elif answer == "3":
-        pass
+        SearchUser()
+    elif answer == "4":
+        DeleteUser()
     elif answer == "0":
         flag = False
     else:
