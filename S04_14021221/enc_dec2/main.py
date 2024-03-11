@@ -21,7 +21,14 @@ def set1():
         return list_special
     
 entry = input("Enter: ")
+entry_list = list(entry)
 for i in range(0, len(entry)):
     list_encryption.append(random.choice(set1()))
 
 print("".join(list_encryption))
+
+entry_q = input("Enter: ")
+for char in list(entry_q):
+    for index, char1 in enumerate(list(list_encryption)):
+        if char1 == char:
+            print(entry_list[index],end="")
