@@ -112,3 +112,5 @@ for z in range(0, ParenthesesChecker()):
     ParenthesesSolver()
 Solve(main.Eqution)
 print(main.Eqution[0])
+
+import time
