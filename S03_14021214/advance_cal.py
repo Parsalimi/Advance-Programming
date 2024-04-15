@@ -33,7 +33,7 @@ def ConvertEntry(equtionStr: str):
     # convert needed strings to int
     for index, item in enumerate(main.Eqution):
         if item not in looking_list:
-            main.Eqution[index] = int(item)
+            main.Eqution[index] = float(item)
 
 # This Function will Check How many Parentheses used in it and if there is a problem it will report it
 def ParenthesesChecker():
