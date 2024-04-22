@@ -1,11 +1,17 @@
+# Gereftan esm
+# generate id
+# search id option
+# save on txt
+
+from random import randint
 from os import system
 
 users = []
-column = '\t | '
+column = '| '
 ######################
 # The users.txt indexing GUIDE:
-# 0  |     1    |     2    |    3   |    4   |   5   |  6
-# ID | username | password | f_name | l_name | email | age
+# 0  |     1    |     2    |    3   |    4   |   5   |  6  |   7
+# ID | username | password | f_name | l_name | email | age | uni_id
 ######################
 def wait():
     input("To Continue Press Enter!!!")
@@ -23,7 +29,8 @@ def UpdateUsersList():
                       "First Name": selected_user[3],
                       "Last Name": selected_user[4],
                       "Email": selected_user[5],
-                      "Age": selected_user[6]})
+                      "Age": selected_user[6],
+                      "uni_id": selected_user[7]})
     file.close()
         
 def add_user():
@@ -35,6 +42,7 @@ def add_user():
     l_name = input("Last Name: ")
     email = input("Email: ")
     age = input("age: ")
+    uni_id = randint(10000000,99999999)
 
     # Looking for Last ID
     file = open("last_user_login_id.txt", "r")
@@ -44,7 +52,7 @@ def add_user():
     last_user_login_id = int(last_user_login_id)+1
 
     file = open("users.txt", "a")
-    file.write(f"\n{last_user_login_id},{username},{password},{f_name},{l_name},{email},{age}")
+    file.write(f"\n{last_user_login_id},{username},{password},{f_name},{l_name},{email},{age},{uni_id}")
     file.close()
 
     
@@ -58,14 +66,7 @@ def ShowUsers():
     UpdateUsersList()
     system('cls')
     for acc in users:
-        print(acc["ID"], column,
-              acc["Username"], column, 
-              acc["Password"], column,
-              acc["First Name"], column,
-              acc["Last Name"], column,
-              acc["Email"], column,
-              acc["Age"],
-              end="")
+        print(f"{acc["ID"]:<1} | {acc["Username"]:<10} | {acc["Password"]:<10} | {acc["First Name"]:<10} | {acc["Last Name"]:<20} | {acc["Email"]:<25} | {acc["Age"]:<3} | {acc["uni_id"]:<9}",end="")
     print()
     wait()
 
@@ -79,15 +80,10 @@ def SearchUser():
             break
         else:
             for acc in users:
-                if acc["ID"] == answer:
-                    print(  acc["ID"], column,
-                            acc["Username"], column, 
-                            acc["Password"], column,
-                            acc["First Name"], column,
-                            acc["Last Name"], column,
-                            acc["Email"], column,
-                            acc["Age"],
-                            end="")
+                uni_id = acc["uni_id"]
+                uni_id = uni_id.strip("\n")
+                if uni_id == answer:
+                    print(f"{acc["ID"]:<2} | {acc["Username"]} | {acc["Password"]} | {acc["First Name"]} | {acc["Last Name"]} | {acc["Email"]} | {acc["Age"]} | {acc["uni_id"]}",end="")
         print()
         wait()
 
