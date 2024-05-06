@@ -7,7 +7,7 @@ class Vending:
         self.name = name
 
     def ShowBranchesList():
-        file = open("Vending\\txt_files\\branches.txt","r")
+        file = open("S08_14030210\Vending\\txt_files\\branches.txt","r")
         branches_text = file.read()
         file.close()
         branches_list = branches_text.split(",")
@@ -15,7 +15,7 @@ class Vending:
         return branches_list
     
     def ShowBranchInventoryList(branchName):
-        file = open("Vending\\txt_files\\vending_inventory.txt","r")
+        file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","r")
         branch_inventory_list = Tool.TxtContentReader(file.read())
         final_list = []
         for inventory in branch_inventory_list:
@@ -38,7 +38,7 @@ class Vending:
         count = int(selectedItem.count) - count
 
         # Update the Database ;)
-        file = open("Vending\\txt_files\\vending_inventory.txt","r")
+        file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","r")
         branch_inventory_list = Tool.TxtContentReader(file.read())
         branch_inventory_list.pop(-1)
         inventory_text = ""
@@ -50,6 +50,6 @@ class Vending:
 
         file.close()
 
-        file = open("Vending\\txt_files\\vending_inventory.txt","w")
+        file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","w")
         file.write(inventory_text)
         file.close()

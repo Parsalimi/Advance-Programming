@@ -15,3 +15,5 @@ Main Program
   - Customer
     - Buy Item
      
+## Suggestions
+[] Add Buy Log

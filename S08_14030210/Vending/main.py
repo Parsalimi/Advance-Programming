@@ -11,7 +11,7 @@ def CleanTerminal():
 
 # This Function looking for admin in file
 def CheckAdmin(username, password):
-    file = open("Vending\\txt_files\\admin.txt","r")
+    file = open("S08_14030210\Vending\\txt_files\\admin.txt","r")
     admins_list = Tool.TxtContentReader(file.read())
     for admin in admins_list:
         if username == admin[0] and password == admin[1]:
@@ -53,7 +53,7 @@ def AdminPanel():
                     branchName = input("What is the Branch name: (0 to exit)\n> ")
                     if branchName == "0":
                         break
-                    file = open("Vending\\txt_files\\branches.txt","a")
+                    file = open("S08_14030210\Vending\\txt_files\\branches.txt","a")
                     file.write(f"{branchName},")
                     file.close()
             elif answer == "2":
@@ -80,7 +80,7 @@ def AdminPanel():
                             branch_text += f"{branch},"
 
                         # Lets Place that text
-                        file = open("Vending\\txt_files\\branches.txt","w")
+                        file = open("S08_14030210\Vending\\txt_files\\branches.txt","w")
                         file.write(branch_text)
                         file.close()
             elif answer == "3":
@@ -105,7 +105,7 @@ def AdminPanel():
                             branch_text += f"{branch},"
 
                         # Lets Place that text
-                        file = open("Vending\\txt_files\\branches.txt","w")
+                        file = open("S08_14030210\Vending\\txt_files\\branches.txt","w")
                         file.write(branch_text)
                         file.close()
             elif answer == "4":
@@ -134,7 +134,7 @@ def AdminPanel():
 
                             inventory_text = f"{branchName},{name},{count},{kind},{sugarPercent},{price},{detail}/"
 
-                            file = open("Vending\\txt_files\\vending_inventory.txt","a")
+                            file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","a")
                             file.write(inventory_text)
                             file.close()
 
@@ -157,7 +157,7 @@ def AdminPanel():
                                 addItemFlag = False
                                 break
 
-                            file = open("Vending\\txt_files\\vending_inventory.txt","r")
+                            file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","r")
                             branch_inventory_list = Tool.TxtContentReader(file.read())
                             branch_inventory_list.pop(-1)
                             inventory_text = ""
@@ -166,7 +166,7 @@ def AdminPanel():
                                     inventory_text += f"{inventory[0]},{inventory[1]},{inventory[2]},{inventory[3]},{inventory[4]},{inventory[5]},{inventory[6]}/"
                             file.close()
 
-                            file = open("Vending\\txt_files\\vending_inventory.txt","w")
+                            file = open("S08_14030210\Vending\\txt_files\\vending_inventory.txt","w")
                             file.write(inventory_text)
                             file.close()
 

@@ -9,4 +9,3 @@ with open("file2.txt","w") as f2_w:
         f1_r.close()
         f2_w.close()
         os.remove("file1.txt")
-
