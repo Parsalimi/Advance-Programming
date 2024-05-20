@@ -1,0 +1,6 @@
+{'id': 2, 'title': '12 Life Rule', 'author': 'Jordan B Peterson', 'year': '2000'}
+{'id': 3, 'title': 'Never Finished', 'author': 'David Goggins', 'year': '2024'}
+{'id': 4, 'title': 'Eat the Frog', 'author': 'Gholi', 'year': '1993'}
+{'id': 5, 'title': 'Hard Working', 'author': 'Emaan', 'year': '2020'}
+{'id': 6, 'title': 'Deep Work', 'author': 'Cal Newport', 'year': '2023'}
+{'id': 8, 'title': 'Atomic Habit', 'author': 'James Clear', 'year': '1995'}

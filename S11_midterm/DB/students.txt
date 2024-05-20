@@ -1,0 +1,3 @@
+{'id': 3, 'name': 'Amin Arshadi', 'age': '19', 'major': 'CS'}
+{'id': 4, 'name': 'Parsa', 'age': '20', 'major': 'CS'}
+{'id': 5, 'name': '', 'age': '23', 'major': ''}
