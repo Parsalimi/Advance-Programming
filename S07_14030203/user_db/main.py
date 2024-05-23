@@ -19,7 +19,7 @@ def wait():
 def UpdateUsersList():
     users.clear()
     lastIndexLine = 2
-    file = open("users.txt","r")
+    file = open("S07_14030203\\user_db\\users.txt","r")
     for userLine in file:
         selected_user = userLine.split(",")
         selected_user[lastIndexLine] = selected_user[lastIndexLine].strip()
@@ -45,18 +45,18 @@ def add_user():
     uni_id = randint(10000000,99999999)
 
     # Looking for Last ID
-    file = open("last_user_login_id.txt", "r")
+    file = open("S07_14030203\\user_db\\last_user_login_id.txt", "r")
     last_user_login_id = file.read()
     file.close()
 
     last_user_login_id = int(last_user_login_id)+1
 
-    file = open("users.txt", "a")
+    file = open("S07_14030203\\user_db\\users.txt", "a")
     file.write(f"\n{last_user_login_id},{username},{password},{f_name},{l_name},{email},{age},{uni_id}")
     file.close()
 
     
-    file = open("last_user_login_id.txt", "w")
+    file = open("S07_14030203\\user_db\\last_user_login_id.txt", "w")
     file.write(str(last_user_login_id))
     file.close()
 
@@ -87,17 +87,23 @@ def SearchUser():
         print()
         wait()
 
+#TODO: FIX THIS
 def DeleteUser():
     while True:
         system('cls')
         print("0 to exit")
         answer = input("Please enter the user ID\n> ")
-        file = open("test.txt","a")
+        textToWriteInFile = ""
         for acc in users:
             if acc["ID"] == answer:
                 pass
             else:
-                file.write(f"{acc[0]},{acc[1]},{acc[2]},{acc[3]},{acc[4]}")
+                textToWriteInFile = f"{acc["ID"]},{acc["Username"]},{acc["Password"]},{acc["First Name"]},{acc["Last Name"]},{acc["Email"]},{acc["Age"]},{acc["uni_id"]}\n"
+
+        file = open("S07_14030203\\user_db\\users.txt","w")
+        file.write(textToWriteInFile)
+        file.close()
+        UpdateUsersList()
                 
         
 flag = True
