@@ -1,9 +1,9 @@
 from tools import *
 from book import Book
 
-class Managment:
+class BookManagment:
     def BookID():
-        with open("S11_sat_midterm\\DB\\last_book_id.txt","r") as file:
+        with open("S12_14020307\\DB\\last_book_id.txt","r") as file:
             lastBookId = file.read()
             if lastBookId != "":
                 lastBookId = int(lastBookId) + 1
@@ -12,8 +12,8 @@ class Managment:
                 return 1
     
     def UpdateLastBookID():
-        lastBookId = Managment.BookID()
-        with open("S11_sat_midterm\\DB\\last_book_id.txt","w") as file:
+        lastBookId = BookManagment.BookID()
+        with open("S12_14020307\\DB\\last_book_id.txt","w") as file:
             file.write(str(lastBookId))
 
     def AddBook():
@@ -22,16 +22,16 @@ class Managment:
         title = input("Enter Book Title: ")
         author = input("Enter Book Author: ")
         year = input("Enter Book published Year: ")
-        selectedBook = Book(Managment.BookID(),title, author, year)
-        with open("S11_sat_midterm\\DB\\books.txt","a") as file:
+        selectedBook = Book(BookManagment.BookID(),title, author, year)
+        with open("S12_14020307\\DB\\books.txt","a") as file:
             file.write(f"{selectedBook.__dict__}\n")
             file.close()
-        Managment.UpdateLastBookID()
+        BookManagment.UpdateLastBookID()
 
     def ShowBooks():
         ClearTerminal()
         print(ColoredNotification("Books List", "green"))
-        with open("S11_sat_midterm\\DB\\books.txt","r") as file:
+        with open("S12_14020307\\DB\\books.txt","r") as file:
             for line in file.readlines():
                 currentBookDict = eval(line)
                 selectedBook = Book(currentBookDict['id'],currentBookDict['title'],currentBookDict['author'],currentBookDict['year'])
@@ -41,49 +41,49 @@ class Managment:
     booksList = []
 
     def UpdateBooksList():
-        Managment.booksList = []
-        with open("S11_sat_midterm\\DB\\books.txt","r") as file:
+        BookManagment.booksList = []
+        with open("S12_14020307\\DB\\books.txt","r") as file:
             for line in file.readlines():
-                Managment.booksList.append(eval(line))
+                BookManagment.booksList.append(eval(line))
 
     def UpdateBooksTxt():
-        with open("S11_sat_midterm\\DB\\books.txt","w") as file:
-            for book in Managment.booksList:
+        with open("S12_14020307\\DB\\books.txt","w") as file:
+            for book in BookManagment.booksList:
                 file.writelines(f"{book}\n")
 
     def SearchBook():
         ClearTerminal()
-        Managment.UpdateBooksList()
+        BookManagment.UpdateBooksList()
         print(ColoredNotification("Search Book", "green"))
         bookId = input("Please Enter the Book ID: ")
-        for book in Managment.booksList:
+        for book in BookManagment.booksList:
             if book['id'] == int(bookId):
                 print(f"Book ID: {book['id']} | Title: {book['title']} | Author: {book['author']} | Year: {book['year']}")
 
     def EditBook():
         ClearTerminal()
-        Managment.UpdateBooksList()
+        BookManagment.UpdateBooksList()
         print(ColoredNotification("Edit Book", "green"))
         bookId = input("Please Enter the Book ID: ")
-        for book in Managment.booksList:
+        for book in BookManagment.booksList:
             if book['id'] == int(bookId):
                 print(f"Book ID: {book['id']} | Title: {book['title']} | Author: {book['author']} | Year: {book['year']}")
         bookTitle = input("Please Enter the NEW Book Title: ")
         bookAuthor = input("Please Enter the NEW Book Author: ")
         bookYear = input("Please Enter the NEW Book Year: ")
-        for index, book in enumerate(Managment.booksList):
+        for index, book in enumerate(BookManagment.booksList):
             if book['id'] == int(bookId):
                 selectedBook = Book(int(bookId), bookTitle, bookAuthor, bookYear)
-                Managment.booksList[index] = selectedBook.__dict__
-        Managment.UpdateBooksTxt()
+                BookManagment.booksList[index] = selectedBook.__dict__
+        BookManagment.UpdateBooksTxt()
         
 
     def DeleteBook():
         ClearTerminal()
-        Managment.UpdateBooksList()
+        BookManagment.UpdateBooksList()
         print(ColoredNotification("Delete Book", "green"))
         bookId = input("Please Enter the Book ID: ")
-        for index, book in enumerate(Managment.booksList):
+        for index, book in enumerate(BookManagment.booksList):
             if book['id'] == int(bookId):
-                Managment.booksList.pop(index)
-        Managment.UpdateBooksTxt()
+                BookManagment.booksList.pop(index)
+        BookManagment.UpdateBooksTxt()
