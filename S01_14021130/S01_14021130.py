@@ -17,6 +17,14 @@ def func_sort(entery_list):
                 entery_list[i] = b
     return entered_list
 
+func_sort([3,5,1,10])
+
+
+
+
+
+
+
 def fun_stack_sort(entery_list):
     for i in range(0, len(entery_list) - 1):
         min = entered_list[0]
